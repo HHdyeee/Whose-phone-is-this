@@ -212,7 +212,7 @@ svg{display:block}
       <div class="sheet-sub">이 페이지는 실제 카카오톡이 아닌 인터랙티브 픽션이에요.</div>
       <button class="sheet-action" id="sheetReplay" type="button">대화 처음부터 다시 보기 <span>↺</span></button>
       <button class="sheet-action" id="sheetTimeSpeed" type="button">시간 흐름 속도 <span id="timeSpeedStatus">4배</span></button>
-      <button class="sheet-action" id="sheetTranslations" type="button">번역 모두 표시 <span id="allTranslationsStatus">꺼짐</span></button>
+      <button class="sheet-action" id="sheetTranslations" type="button">번역 모두 표시 <span id="allTranslationsStatus">켜짐</span></button>
      <button class="sheet-action" id="sheetPhoto" type="button">쭈 프로필 사진 다운로드 <span>↓</span></button>
      
       <button class="sheet-close" id="sheetClose" type="button">닫기</button>
@@ -457,7 +457,8 @@ svg{display:block}
     index=0;busy=false;hideKeyboard();
     els.scroll.querySelectorAll('.msg').forEach(m=>m.remove());
     els.entryPreview.textContent='대화를 시작해 보세요';els.entryTime.textContent='';
-    showAll=false;byId('allTranslationsStatus').textContent='꺼짐';els.overlay.hidden=true;updateHint();scrollBottom();
+   showAll=true;
+byId('allTranslationsStatus').textContent='켜짐';els.overlay.hidden=true;updateHint();scrollBottom();
     toast('처음부터 다시 시작합니다');
   }
   byId('sheetReplay').addEventListener('click',replay);
