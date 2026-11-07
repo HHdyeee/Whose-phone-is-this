@@ -213,8 +213,8 @@ svg{display:block}
       <button class="sheet-action" id="sheetReplay" type="button">대화 처음부터 다시 보기 <span>↺</span></button>
       <button class="sheet-action" id="sheetTimeSpeed" type="button">시간 흐름 속도 <span id="timeSpeedStatus">4배</span></button>
       <button class="sheet-action" id="sheetTranslations" type="button">번역 모두 표시 <span id="allTranslationsStatus">꺼짐</span></button>
-      <button class="sheet-action" id="sheetPhoto" type="button">쭈 프로필 사진 넣기 <span>›</span></button>
-      <button class="sheet-action" id="sheetExport" type="button">프로필 사진이 포함된 HTML 저장 <span>↓</span></button>
+     <button class="sheet-action" id="sheetPhoto" type="button">쭈 프로필 사진 다운로드 <span>↓</span></button>
+     
       <button class="sheet-close" id="sheetClose" type="button">닫기</button>
     </div>
   </div>
@@ -482,7 +482,40 @@ svg{display:block}
   function refreshAvatars(){document.querySelectorAll('[data-avatar]').forEach(attachAvatar);}
   refreshAvatars();
   function selectPhoto(){els.overlay.hidden=true;els.photoPicker.click();}
-  byId('sheetPhoto').addEventListener('click',selectPhoto);
+  
+byId('sheetPhoto').addEventListener('click', async () => {
+  els.overlay.hidden = true;
+
+  if (!portrait) {
+    toast('저장할 프로필 사진이 없어요');
+    return;
+  }
+
+  try {
+    const response = await fetch(portrait);
+    if (!response.ok) throw new Error('Download failed');
+
+    const blob = await response.blob();
+    const ext = blob.type.includes('png') ? 'png'
+      : blob.type.includes('webp') ? 'webp'
+      : 'jpg';
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = `쭈_프로필.${ext}`;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch (error) {
+    toast('프로필 사진을 다운로드할 수 없어요');
+  }
+});
+
   function saveSelfContainedHTML(){
     if(!portrait||!portrait.startsWith('data:image/')){
       els.overlay.hidden=true;selectPhoto();
@@ -525,8 +558,8 @@ svg{display:block}
     els.overlay.hidden=true;
     toast('사진을 HTML 안에 저장했어요');
   }
-  byId('sheetExport').addEventListener('click',saveSelfContainedHTML);
-  byId('plusBtn').addEventListener('click',()=>toast('오른쪽 위 메뉴에서 프로필 사진을 바꿀 수 있어요'));
+
+  byId('plusBtn').addEventListener('click',()=>toast('오른쪽 위 메뉴에서 프로필 사진을 다운로드할 수 있어요'));
   els.photoPicker.addEventListener('change',()=>{
     const f=els.photoPicker.files&&els.photoPicker.files[0];if(!f)return;
     if(!f.type.startsWith('image/')){toast('이미지를 골라 주세요');return;}
