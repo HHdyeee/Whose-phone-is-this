@@ -211,10 +211,10 @@ svg{display:block}
       <div class="sheet-title">쭈 · 대화 설정</div>
       <div class="sheet-sub">이 페이지는 실제 카카오톡이 아닌 인터랙티브 픽션이에요.</div>
       <button class="sheet-action" id="sheetReplay" type="button">대화 처음부터 다시 보기 <span>↺</span></button>
-      <button class="sheet-action" id="sheetTimeSpeed" type="button">시간 흐름 속도 <span id="timeSpeedStatus">4배</span></button>
+     
       <button class="sheet-action" id="sheetTranslations" type="button">번역 모두 표시 <span id="allTranslationsStatus">켜짐</span></button>
      <button class="sheet-action" id="sheetPhoto" type="button">쭈 프로필 사진 다운로드 <span>↓</span></button>
-     
+     <button class="sheet-action" id="sheetTimeSpeed" type="button">시간 흐름 속도 <span id="timeSpeedStatus">4배</span></button>
       <button class="sheet-close" id="sheetClose" type="button">닫기</button>
     </div>
   </div>
@@ -290,10 +290,21 @@ svg{display:block}
     const hour=date.getHours();
     return `${hour<12?'오전':'오후'} ${hour%12||12}:${pad2(date.getMinutes())}`;
   }
-  function renderSceneClock(){
-    const t=sceneDate();
-    byId('systemClock').textContent=`${pad2(t.getHours())}:${pad2(t.getMinutes())}`;
-  }
+
+function renderSceneClock(){
+  const t = new Date();
+
+  byId('systemClock').textContent =
+    `${pad2(t.getHours())}:${pad2(t.getMinutes())}`;
+
+  els.day.textContent = new Intl.DateTimeFormat('ko-KR', {
+    year:'numeric',
+    month:'long',
+    day:'numeric',
+    weekday:'long'
+  }).format(t);
+}
+
   function syncSceneClock(){
     const now=Date.now();
     const realDelta=Math.max(0,Math.min((now-lastRealTick)/1000,5));
