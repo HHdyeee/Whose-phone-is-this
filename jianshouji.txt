@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<!--
+交互式聊天模板｜使用说明
+
+
+
+一、简单说明
+
+若使用本模板，请标明我的账号：亚网/ao3：HHhhYyJ。我忘了我微博叫什么了。
+直接用txt修改就行，改完可以把文件后缀改为html。
+
+如果想生成可以分享的公开链接，将文件命名为 index.html，上传到 GitHub 公开仓库的最外层；使用本地头像图片时，将图片按原来的文件夹位置一同上传。随后打开仓库的 Settings（设置）→ Pages，在 Source（来源）中选择 Deploy from a branch（从分支部署），分支选择上传文件所在的分支，通常为 main，文件夹选择 /（root），点击 Save（保存）。等待发布完成后，点击 Visit site（访问网站），复制浏览器地址栏中的网址，就可以分享给其他人了。
+
+要是实在看不懂就交给AI来改吧🫠
+
+二、开始编辑
+
+1. 按 Ctrl+F；Mac 上按 Command+F，查找下文给出的关键词。
+2. 本说明中的代码用于对照。按查找框的“下一个”，继续找到文件后半部分
+   “常用设置”或“对话内容”下方的实际代码，再按旁边的说明替换文字或数字。
+3. 按 Ctrl+S；Mac 上按 Command+S，保存文件。
+4. 后缀改为html，使用浏览器打开，刷新页面，查看修改后的效果。
+
+
+保存时选择纯文本和 UTF-8 编码；UTF-8 可用于保存本文件中的中文和韩文。
+完整文件名应为 chat.html；若软件自动补上了 .txt，将末尾的 .txt 去掉即可。
+
+三、修改人物名称
+查找 contactName，找到下面这一行：
+  contactName:'角色 B',
+将引号内的“角色 B”换成需要显示的名字。例如：
+  contactName:'小林',
+保存并刷新后，聊天列表、对话顶部和消息旁的名称会一同更新。
+这行中的 contactName 是设置名称，引号内的文字是你填写的内容。
+同样的方法也适用于网页标题 pageTitle、头像占位文字 avatarText 等设置。
+
+四、设置头像
+
+可以使用电脑中的图片，也可以先将图片上传到 GitHub，再填写图片的网址。
+
+（1）使用电脑中的图片
+
+先准备一张图片，例如 avatar.png，并将它与 HTML 文件放在同一个文件夹中。
+查找 avatarUrl，将 avatarUrl:'' 改为 avatarUrl:'avatar.png'。
+图片名按实际文件填写；如果图片叫 photo.jpg，就填写 avatarUrl:'photo.jpg'。
+若图片放在旁边的 images 文件夹里，则填写 avatarUrl:'images/avatar.png'。
+这里的斜线表示“进入这个文件夹，再找到图片”。
+
+将网页分享给其他人时，把 HTML 和图片一起提供，并保留原来的文件夹位置。
+
+（2）通过 GitHub 上传图片
+
+GitHub 中的“仓库”可以理解为存放文件的项目文件夹。将头像上传到公开仓库后，就可以通过图片网址加载头像。
+
+1. 注册并登录 GitHub。先点击右上角头像 → Settings（设置）→ Emails（邮箱），勾选 Keep my email addresses private（保持邮箱地址私密），这样之后通过网页上传或修改文件时，提交记录会使用 GitHub 提供的替代邮箱地址。再点击右上角的“＋”，选择 New repository（新建仓库）。已有公开仓库时，完成邮箱隐私设置后，可以直接打开它，从第 3 步开始。
+2. 在 Repository name（仓库名称）中填写名称，例如 chat-images。将可见性选为 Public（公开），开启 Add README（添加说明文件），再点击 Create repository（创建仓库）。
+3. 在仓库的文件列表上方，点击 Add file（添加文件）→ Upload files（上传文件）。
+4. 将头像图片拖入上传区域，或点击 choose your files（选择文件）选中图片，例如 avatar.png。
+5. 在提交说明中填写“上传头像”，选择直接提交到当前分支，再点击 Commit changes（提交更改），保存图片。
+6. 回到文件列表，点击刚上传的 avatar.png，再点击 Raw（原始文件）。图片单独打开后，复制浏览器地址栏中的完整网址。
+7. 回到模板，查找 avatarUrl，将复制的网址粘贴到两枚单引号之间：
+
+   avatarUrl:'在这里粘贴刚复制的图片网址',
+
+保存文件后，用浏览器打开 HTML，即可查看头像。使用这种方式时，网页会从该网址读取图片，分享模板时可以直接保留这条图片链接。
+
+（3）在页面中预览头像
+
+在网页菜单中点击“选择头像（프로필 사진 선택）”，可以先查看本地图片的效果。
+菜单选择的图片在本次打开页面期间使用，刷新后会重新读取 avatarUrl 中的设置。
+确定使用哪张图片后，按照上面的方法，将图片名或图片网址填入 avatarUrl。
+
+五、修改日期和时间
+查找 dateLabel，将引号内的日期改为故事发生的日期。
+例如：dateLabel:'2026年12月1日（2026년 12월 1일）',
+该日期显示在聊天内容上方；使用双语时，将括号内外的日期一同修改。
+页面顶部时钟显示访客设备的当前时间，每条消息旁记录该消息出现的时间。
+
+六、编辑对话
+查找 const story = [，其下方就是按先后顺序排列的消息。
+每一行中，from 决定由谁说话，ko 是气泡中的台词，zh 是气泡下方的译文。
+
+例如：
+  {from:'me',ko:'你好。',zh:'안녕하세요.'},
+这一行表示我方发送“你好。”，下方可展开韩文译文。
+将 me 改为 them，这句话就会由对方发出。
+me 对应右侧气泡，them 对应左侧气泡。正文和译文都可以使用自己需要的语言。
+
+增加消息：复制一整行，粘贴到需要的位置，再修改说话人和内容。
+删除消息：删除对应的整行。
+调整顺序：将整行剪切到新的位置，页面会按从上到下的顺序播放。
+同一人物可以连续发送多条消息；第一条写 them 时，对方会在进入聊天后先发言。
+
+只显示正文时，将译文写为 zh:''，两个单引号之间留空。例如：
+  {from:'me',ko:'你好。',zh:''},
+需要在同一条消息中换行时，在换行位置写 \n。例如：
+  {from:'me',ko:'第一行\n第二行',zh:''},
+
+修改文字时，保留外侧的英文引号、逗号和大括号。
+每条消息都可以沿用示例末尾的英文逗号，表示这一条填写结束。
+文字中含有英文单引号时，可以改用英文双引号包住整段文字。例如：
+  {from:'me',ko:"I'm here.",zh:'我在这里。'},
+
+七、调整外观和播放速度
+查找“页面样式”，可找到气泡颜色、背景颜色和字号等设置及其说明。
+查找“常用设置”，可调整输入和回复的速度。
+时间以毫秒填写：1000 毫秒等于 1 秒，500 毫秒等于半秒。
+例如，把 replyDelayMs:380 改为 replyDelayMs:1000，
+表示模拟已读后等待 1 秒，再显示对方的第一条回复。
+
+八、阅读各部分代码
+页面样式（CSS）：决定颜色、字号、大小和位置。
+页面结构（HTML）：组成标题、按钮、列表、输入框等区域。
+交互功能（JavaScript）：处理点击操作、逐字输入、回复和重播。
+每个模块前都有中文注释，可以先阅读说明，再修改对应内容。
+按钮和提示采用“中文（韩语）”的形式，韩文键盘上的字母按原样显示。
+
+
+九、切换拼音键盘
+查找 keyboardLayout，继续找到“常用设置”中的这一行：
+  keyboardLayout:'korean',
+将引号内的 korean 改为 pinyin，打开页面时就会使用拼音字母键盘：
+  keyboardLayout:'pinyin',
+korean 表示韩文键盘，pinyin 表示拼音键盘，两个名称均使用小写英文字母。
+
+拼音键盘按 QWERTY 顺序排列，共三行字母键。
+在页面中点击键盘左下方的 🌐，可以随时切换这两种布局。
+拼音布局下，点击 ⇧ 可以切换字母大小写，再次点击恢复小写。
+
+该键盘用于配合预设台词展示输入过程。中文台词填写在“对话内容”的 ko 后，
+例如 ko:'你好，我们明天见。'，点击输入框后，这句话会逐字填入。
+点击字母键可在输入框中追加字母；发送时显示的内容以 ko 中填写的台词为准。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#b2c7d9">
+<!-- 浏览器标签页的标题由下方常用设置中的 pageTitle 同步更新。 -->
+<title>交互式聊天模板</title>
+
+<style>
+/* 页面样式：该部分用于设置颜色、尺寸和排版。下方每组说明对应一类页面内容。 */
+/* 页面颜色与字体：
+   --kakao 设置我方气泡和发送按钮的颜色，--chat-bg 设置聊天背景，--ink 设置主要文字颜色。
+   # 后面的字母和数字表示一种颜色，例如 #ffffff 为白色，#000000 为黑色。
+   将 --chat-bg:#b2c7d9 改为 --chat-bg:#e7dfd8，即可将聊天背景换为浅米色。
+   修改背景时，可一同修改文件顶部 theme-color 后引号内的颜色，供浏览器外观使用。
+   font-family 列出字体名称，页面会按顺序使用设备上已有的字体。 */
+:root {
+  --kakao:#fee500;
+  --chat-bg:#b2c7d9;
+  --ink:#191919;
+  font-family:-apple-system,BlinkMacSystemFont,
+    "Apple SD Gothic Neo","Noto Sans KR",
+    "Malgun Gothic","PingFang SC",sans-serif;
+  color:var(--ink);
+}
+
+* {
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body {
+  padding:0;
+  margin:0;
+  min-height:100%;
+  overflow:hidden;
+}
+
+body {
+  background:radial-gradient(circle at 18% 20%,#e8edf4 0,transparent 42%),
+    linear-gradient(140deg,#ced6df,#e7e1dc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+button,input {font:inherit}
+button {cursor:pointer}
+svg {display:block}
+[hidden] {display:none!important}
+
+/* 手机外框：width 设置宽度，height 设置高度，border-radius 设置圆角大小。
+   px 表示像素，是页面尺寸的单位。例如，把 border-radius:36px 改为 20px，圆角会变小。 */
+.phone {
+  position:relative;
+  width:min(430px,100vw);
+  height:min(876px,96dvh);
+  min-height:500px;
+  overflow:hidden;
+  background:#fff;
+  border-radius:36px;
+  box-shadow:0 24px 70px rgba(15,28,46,.25);
+  display:flex;
+  flex-direction:column;
+  isolation:isolate;
+}
+
+/* 顶部状态栏：显示设备当前时间，并绘制信号和电池图标。 */
+
+.status-bar {
+  height:47px;
+  min-height:47px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:9px 24px 0;
+  font-size:14px;
+  font-weight:700;
+  z-index:3;
+  user-select:none;
+}
+
+.status-bar.is-room {
+  background:var(--chat-bg);
+}
+
+.status-icons {
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.status-icons svg {
+  width:18px;
+  height:16px;
+  fill:currentColor;
+}
+
+.status-icons .battery {
+  width:25px;
+  height:14px;
+}
+
+/* 聊天列表：设置列表标题、工具按钮、联系人条目和底部导航的布局。 */
+
+.screen {
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-height:0;
+}
+
+.list-header {
+  height:70px;
+  min-height:70px;
+  padding:12px 21px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.list-title {
+  font-size:27px;
+  font-weight:760;
+  letter-spacing:-1.3px;
+}
+
+.list-tools {
+  display:flex;
+  align-items:center;
+  gap:17px;
+}
+
+.icon-btn {
+  background:transparent;
+  border:0;
+  padding:4px;
+  display:grid;
+  place-items:center;
+  color:#252525;
+}
+
+.icon-btn svg {
+  width:23px;
+  height:23px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+  stroke-linejoin:round;
+  stroke-linecap:round;
+}
+
+.list-filter {
+  margin:5px 19px 12px;
+  display:flex;
+  gap:12px;
+  min-height:36px;
+  flex-wrap:wrap;
+  align-items:center;
+  font-weight:650;
+  font-size:13px;
+}
+
+.list-filter .chosen {
+  color:#181818;
+  position:relative;
+}
+
+.list-filter .chosen:after {
+  content:"";
+  height:3px;
+  width:100%;
+  position:absolute;
+  bottom:-8px;
+  left:0;
+  background:#1c1c1c;
+  border-radius:3px;
+}
+
+.list-filter span:not(.chosen) {
+  color:#9a9a9a;
+}
+
+.list-body {
+  flex:1;
+  overflow:auto;
+}
+
+.chat-entry {
+  display:flex;
+  align-items:center;
+  width:100%;
+  gap:12px;
+  text-align:left;
+  background:#fff;
+  border:0;
+  padding:16px 19px 15px;
+  min-height:88px;
+}
+
+.chat-entry:active {
+  background:#f7f7f7;
+}
+
+/* 头像容器：没有设置图片或图片加载失败时，显示背景色和占位文字。 */
+.avatar {
+  flex:none;
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  background:linear-gradient(145deg,#a69687,#d9c4b5 54%,#9c9691);
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-size:18px;
+  font-weight:700;
+}
+
+/* 头像图片：object-fit:cover 使图片填满容器；object-position 可调整裁切位置。 */
+.avatar img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 38%;
+  position:absolute;
+  inset:0;
+  display:none;
+}
+
+.avatar.has-photo img {
+  display:block;
+}
+
+.avatar.large {
+  width:55px;
+  height:55px;
+  border-radius:17px;
+}
+
+.avatar.small {
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  font-size:13px;
+}
+
+/* 联系人信息：名称、最近一条消息和时间共同组成列表中的聊天摘要。 */
+.entry-main {
+  min-width:0;
+  flex:1;
+}
+
+.entry-title {
+  font-size:16px;
+  line-height:1.5;
+  font-weight:650;
+}
+
+.entry-last {
+  color:#969696;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.entry-side {
+  align-self:flex-start;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  align-items:flex-end;
+  margin-top:3px;
+}
+
+.entry-time {
+  font-size:10.8px;
+  color:#a4a4a4;
+  white-space:nowrap;
+}
+
+.unread-badge {
+  min-width:18px;
+  height:18px;
+  border-radius:100px;
+  background:#ed5a4b;
+  color:#fff;
+  font-size:11px;
+  display:grid;
+  place-items:center;
+  padding:0 4px;
+}
+
+/* 底部导航：绘制好友、聊天、购物等栏目图标，作为聊天列表下方的装饰栏。 */
+.bottom-nav {
+  height:68px;
+  min-height:68px;
+  border-top:1px solid #f3f3f3;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  color:#b8b8b8;
+  background:#fafafa;
+}
+
+.nav-tab {
+  width:20%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  font-size:10px;
+  text-align:center;
+  line-height:1.35;
+}
+
+.nav-tab svg {
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.nav-tab.active {
+  color:#171717;
+}
+
+.home-footer {
+  height:22px;
+  min-height:22px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:7px;
+  background:#fafafa;
+  z-index:4;
+}
+
+.home-footer.is-room {
+  background:#fff;
+}
+
+.home-indicator {
+  width:116px;
+  height:4px;
+  border-radius:99px;
+  background:#171717;
+}
+
+/* 对话页面：设置标题栏、消息滚动区域、日期和聊天气泡的布局。 */
+
+#roomScreen {
+  background:var(--chat-bg);
+}
+
+.room-header {
+  height:60px;
+  min-height:60px;
+  padding:2px 16px 7px 17px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  background:var(--chat-bg);
+  border-bottom:1px solid rgba(28,40,52,.055);
+  z-index:2;
+}
+
+.back-btn svg {
+  width:27px;
+  height:27px;
+}
+
+.room-name {
+  font-size:17px;
+  font-weight:690;
+  flex:1;
+}
+
+.room-side {
+  display:flex;
+  gap:11px;
+}
+
+.messages {
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:17px 12px 26px;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+}
+
+.messages::-webkit-scrollbar {
+  display:none;
+}
+
+/* 日期标签：该部分设置日期文字的背景、字号和位置。日期内容在 dateLabel 中修改。 */
+.day-marker {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:2px auto 26px;
+}
+
+.day-marker span {
+  border-radius:20px;
+  background:rgba(56,72,90,.14);
+  color:#f8fbfe;
+  font-size:11px;
+  padding:6px 13px;
+}
+
+/* 消息排列：mine 表示右侧我方消息，theirs 表示左侧对方消息。 */
+.msg {
+  display:flex;
+  gap:7px;
+  margin-bottom:10px;
+  align-items:flex-start;
+  animation:comeIn .22s ease-out both;
+}
+
+@keyframes comeIn {
+  from {
+    opacity:0;
+    transform:translateY(9px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.msg.mine {
+  justify-content:flex-end;
+  margin-left:25px;
+}
+
+.msg.theirs {
+  margin-right:22px;
+}
+
+/* 对方资料：同一人物连续发言时，后续消息留出头像位置，但不重复显示头像和名称。 */
+.profile-slot {
+  width:38px;
+  flex:none;
+}
+
+.profile-name {
+  font-size:12px;
+  color:#253344;
+  margin:0 0 6px 1px;
+  font-weight:550;
+}
+
+.msg-content {
+  min-width:0;
+  max-width:calc(100% - 54px);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.msg.mine .msg-content {
+  align-items:flex-end;
+  max-width:81%;
+}
+
+.bubble-row {
+  display:flex;
+  align-items:flex-end;
+  gap:5px;
+  max-width:100%;
+}
+
+.msg.mine .bubble-row {
+  flex-direction:row-reverse;
+}
+
+/* 聊天气泡：font-size 设置字号，例如将 15px 改为 17px，文字会变大。
+   padding 设置文字与气泡边缘的距离；下方 mine 设置右侧气泡，theirs 设置左侧气泡。 */
+.bubble {
+  padding:9px 11px 10px;
+  font-size:15px;
+  line-height:1.5;
+  letter-spacing:-.35px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  max-width:100%;
+  width:max-content;
+  min-width:26px;
+  box-shadow:0 1px 1px rgba(30,40,60,.035);
+}
+
+.msg.mine .bubble {
+  background:var(--kakao);
+  border-radius:12px 3px 12px 12px;
+}
+
+.msg.theirs .bubble {
+  background:#fff;
+  border-radius:3px 12px 12px 12px;
+}
+
+/* 消息侧栏：显示消息出现时的时间，以及我方消息旁的未读数字。 */
+.msg-side {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-end;
+  gap:3px;
+  flex:none;
+  padding-bottom:2px;
+}
+
+.msg.mine .msg-side {
+  align-items:flex-end;
+}
+
+.unread-num {
+  color:#f9e217;
+  font-size:11px;
+  line-height:12px;
+  font-weight:700;
+  min-height:12px;
+}
+
+.msg-time {
+  font-size:10px;
+  color:#536476;
+  white-space:nowrap;
+  line-height:1.15;
+}
+
+/* 翻译显示：点击按钮后展开或收起 zh 中填写的译文。先在对话内容中填好译文，即可在这里查看。 */
+.translate-btn {
+  border:0;
+  background:rgba(247,250,253,.30);
+  color:#465f77;
+  border-radius:20px;
+  padding:3px 9px;
+  margin-top:4px;
+  line-height:1.4;
+  font-size:10px;
+  display:inline-flex;
+  gap:4px;
+  align-items:center;
+}
+
+.translate-btn[aria-expanded="true"] {
+  background:rgba(255,255,255,.63);
+  color:#314457;
+}
+
+.translate-btn svg {
+  width:11px;
+  height:11px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.6;
+}
+
+.translation {
+  font-size:12px;
+  line-height:1.58;
+  padding:7px 9px;
+  border-radius:7px;
+  background:rgba(255,255,255,.48);
+  color:#36465a;
+  margin-top:4px;
+  max-width:100%;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+/* 消息输入区：显示操作提示、预设消息和发送按钮。 */
+
+.compose-panel {
+  background:#fff;
+  z-index:3;
+}
+
+.next-hint {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:29px;
+  padding:6px 12px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+  background:#f8f9fb;
+  color:#7e8d9a;
+  font-size:11px;
+  gap:6px;
+}
+
+.next-hint:before {
+  content:"";
+  width:5px;
+  height:5px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:#e9c600;
+}
+
+.next-hint.waiting:before {
+  background:#909da8;
+  animation:blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from {opacity:.25}
+  to {opacity:1}
+}
+
+.compose-row {
+  height:56px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 11px 8px;
+}
+
+.compose-plus {
+  width:30px;
+  height:32px;
+  border:0;
+  background:transparent;
+  color:#929699;
+  font-size:31px;
+  font-weight:200;
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+
+.field-shell {
+  height:38px;
+  min-width:0;
+  flex:1;
+  border:1px solid #ededee;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  background:#f9f9fa;
+  padding-left:11px;
+}
+
+.composer-input {
+  border:0;
+  background:none;
+  outline:none;
+  width:100%;
+  min-width:0;
+  font-size:13px;
+  padding:6px 0;
+  color:#111;
+  cursor:pointer;
+}
+
+.composer-input::placeholder {
+  color:#acacaf;
+}
+
+.field-smile {
+  background:none;
+  border:0;
+  color:#a5a5a5;
+  padding:5px 6px;
+}
+
+.field-smile svg {
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+}
+
+.send-btn {
+  background:#f0f0f0;
+  border:0;
+  border-radius:10px;
+  width:37px;
+  height:37px;
+  display:grid;
+  place-items:center;
+  color:#bababa;
+}
+
+.send-btn.ready {
+  background:var(--kakao);
+  color:#343434;
+}
+
+.send-btn svg {
+  width:20px;
+  height:20px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* 模拟键盘：点击输入框后出现，配合台词逐字填入的动画显示。
+   keyboardLayout 决定默认显示韩文字母还是拼音字母，点击 🌐 可在两者之间切换。
+   两种布局使用同一组尺寸和颜色，下面的样式会同时应用于它们。 */
+
+.keyboard {
+  height:258px;
+  min-height:258px;
+  background:#d4d7df;
+  padding:5px 4px 10px;
+  user-select:none;
+  animation:keyIn .16s ease-out;
+}
+
+@keyframes keyIn {
+  from {
+    transform:translateY(30px);
+    opacity:.65;
+  }
+  to {
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+.keyboard-guide {
+  height:34px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 13px;
+  color:#59616f;
+  font-size:13px;
+}
+
+.keyboard-guide span:nth-child(2) {
+  color:#7d8792;
+  font-size:11px;
+}
+
+.key-line {
+  display:flex;
+  justify-content:center;
+  gap:4px;
+  margin:4px 0 8px;
+  height:43px;
+}
+
+.key {
+  border:0;
+  background:#fff;
+  color:#222;
+  border-radius:5px;
+  box-shadow:0 1px 0 #a6aab3;
+  flex:1;
+  text-align:center;
+  font-size:19px;
+  padding:0;
+  display:grid;
+  place-items:center;
+}
+
+.key.wide {
+  flex:1.38;
+  background:#aeb5c1;
+  font-size:15px;
+}
+
+.key.space {
+  flex:4.5;
+  font-size:14px;
+}
+
+.key.lang {
+  font-size:12px;
+}
+
+.key.send-key {
+  line-height:1.2;
+  overflow-wrap:anywhere;
+  background:#b0b9c8;
+  color:#273b53;
+  flex:1.42;
+  font-size:12px;
+  font-weight:650;
+}
+
+.key[data-key="shift"][aria-pressed="true"] {
+  background:#f6efbd; /* 拼音字母切换为大写时，以浅黄色标示 ⇧ 按钮。 */
+}
+
+.key.pressed {
+  background:#f6efbd;
+}
+
+/* 设置菜单：覆盖在当前页面上，可重新播放、切换翻译或选择头像。 */
+
+.overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.28);
+  z-index:9;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.sheet {
+  width:100%;
+  background:#fff;
+  border-radius:18px 18px 0 0;
+  padding:19px 23px 31px;
+  box-shadow:0 -8px 30px rgba(0,0,0,.12);
+}
+
+.sheet-title {
+  font-weight:700;
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.sheet-sub {
+  color:#8c8c8c;
+  font-size:12px;
+  margin-bottom:13px;
+  line-height:1.6;
+}
+
+.sheet-action {
+  width:100%;
+  min-height:49px;
+  padding:10px 0;
+  gap:12px;
+  line-height:1.5;
+  border:0;
+  border-bottom:1px solid #f1f1f1;
+  text-align:left;
+  background:#fff;
+  color:#252525;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* 双语文字较长，菜单条目允许换行；右侧状态保持完整显示。 */
+.sheet-action > span {flex-shrink:0}
+
+.sheet-close {
+  margin-top:10px;
+  background:#f3f3f3;
+  border:0;
+  border-radius:10px;
+  width:100%;
+  height:44px;
+  color:#555;
+}
+
+/* 短暂提示：用于显示操作结果，出现后会自动隐藏。 */
+.toast {
+  position:absolute;
+  z-index:12;
+  bottom:93px;
+  left:50%;
+  transform:translate(-50%,8px);
+  max-width:85%;
+  border-radius:40px;
+  background:rgba(33,40,47,.87);
+  color:#fff;
+  padding:9px 14px;
+  font-size:12px;
+  text-align:center;
+  opacity:0;
+  transition:opacity .2s,transform .2s;
+  pointer-events:none;
+}
+
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* 列表搜索：输入人物名称或搜索别名后，筛选当前唯一的聊天条目。 */
+.searchbox {
+  padding:2px 19px 10px;
+}
+
+.searchbox input {
+  width:100%;
+  border:0;
+  border-radius:12px;
+  background:#f5f5f5;
+  padding:10px 12px;
+  font-size:13px;
+}
+
+/* 手机适配：屏幕较窄时取消外框，使页面填满屏幕，并留出系统安全区域。 */
+@media(max-width:600px) {
+  body {background:#fff}
+  .phone {
+    width:100%;
+    height:100dvh;
+    min-height:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+  .status-bar {
+    height:calc(38px + env(safe-area-inset-top));
+    min-height:calc(38px + env(safe-area-inset-top));
+    padding-top:env(safe-area-inset-top);
+  }
+  .home-footer {
+    height:calc(18px + env(safe-area-inset-bottom));
+    min-height:calc(18px + env(safe-area-inset-bottom));
+    padding-bottom:max(6px,env(safe-area-inset-bottom));
+  }
+  .keyboard {
+    height:260px;
+    min-height:260px;
+  }
+}
+
+/* 矮屏适配：缩小模拟键盘高度，为聊天内容保留更多空间。 */
+@media(max-height:650px) {
+  .keyboard {
+    height:214px;
+    min-height:214px;
+  }
+  .key-line {
+    height:35px;
+    margin-bottom:5px;
+  }
+  .keyboard-guide {
+    height:25px;
+  }
+}
+
+/* 减少动画：设备设置为减少动态效果时，缩短动画并取消平滑滚动。 */
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- 页面结构：该部分提供按钮、列表和输入框。消息会在播放时逐条加入页面。
+     成对的尖括号标记叫作“标签”，用于说明这段内容是标题、按钮还是其他区域。
+     例如，<span>聊天</span> 中的“聊天”就是显示在页面上的文字。
+     id 是每个区域的名称，后面的交互代码通过这个名称找到对应区域。
+     修改按钮文字时，保留标签中的 id，替换标签之间的文字即可。
+     svg 和 path 用于绘制图标，例如搜索按钮上的放大镜。 -->
+<div class="phone" id="phone">
+
+  <!-- 顶部状态栏：时间由脚本自动更新。 -->
+  <div class="status-bar" id="statusBar">
+    <span id="systemClock">--:--</span>
+    <div class="status-icons">
+      <svg viewBox="0 0 20 16">
+        <path d="M1 6.7c5-4.8 13-4.8 18 0L10 16z"/>
+      </svg>
+      <svg viewBox="0 0 20 16">
+        <path d="M2 4.7a12.4 12.4 0 0 1 16 0l-2.2 3a8.8 8.8 0 0 0-11.6 0zm4.2 4.8a6.4 6.4 0 0 1 7.6 0L10 14z"/>
+      </svg>
+      <svg class="battery" viewBox="0 0 27 15">
+        <rect x="1" y="1" width="22" height="13" rx="3" stroke="currentColor" stroke-width="1.3" fill="none"/>
+        <rect x="3.1" y="3" width="17" height="9" rx="1.6"/>
+        <path d="M24.3 5.2c1.3.2 1.8 1.3 1.8 2.3s-.5 2.1-1.8 2.3z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 聊天列表：点击人物条目后进入对话。名称和头像由常用设置统一填写。 -->
+  <section class="screen" id="listScreen">
+
+    <div class="list-header">
+      <div class="list-title">聊天（채팅）</div>
+      <div class="list-tools">
+        <button class="icon-btn" id="searchOpen" type="button" aria-label="搜索（검색）">
+          <svg viewBox="0 0 24 24">
+            <circle cx="10.5" cy="10.5" r="6.6"/>
+            <path d="m15.5 15.5 5 5"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="listSettings" type="button" aria-label="设置（설정）">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="list-filter">
+      <span class="chosen">全部（전체）</span>
+      <span>未读（안 읽음）</span>
+      <span>收藏（즐겨찾기）</span>
+    </div>
+
+    <div class="searchbox" id="searchbox" hidden>
+      <input id="searchInput" type="search" placeholder="搜索姓名（이름 검색）">
+    </div>
+
+    <main class="list-body">
+      <button class="chat-entry" id="chatEntry" type="button">
+        <div class="avatar large" data-avatar>
+          <span data-avatar-label>角</span>
+          <img alt="聊天对象头像">
+        </div>
+        <div class="entry-main">
+          <div class="entry-title" data-contact-name>角色 B</div>
+          <div class="entry-last" id="entryPreview">开始聊天吧（대화를 시작해 보세요）</div>
+        </div>
+        <div class="entry-side">
+          <div class="entry-time" id="entryTime"></div>
+          <div class="unread-badge" id="entryUnread" hidden>1</div>
+        </div>
+      </button>
+    </main>
+
+    <div class="bottom-nav">
+      <div class="nav-tab">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="7.4" r="4"/><path d="M4.5 21c.2-4.9 3.1-7.3 7.5-7.3s7.3 2.4 7.5 7.3"/></svg>
+        <span>好友（친구）</span>
+      </div>
+      <div class="nav-tab active">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2.6C5.6 2.6 1.5 6.5 1.5 11c0 3 1.8 5.5 4.7 7L5 22l4.3-2.3c.9.2 1.8.3 2.7.3 6.4 0 10.5-3.9 10.5-8.5S18.4 2.6 12 2.6z"/></svg>
+        <span>聊天（채팅）</span>
+      </div>
+      <div class="nav-tab">
+        <svg viewBox="0 0 24 24"><path d="M3 4.5h18v13H9l-5 3v-3H3z"/><path d="M7 9h10M7 13h7"/></svg>
+        <span>开放聊天（오픈채팅）</span>
+      </div>
+      <div class="nav-tab">
+        <svg viewBox="0 0 24 24"><path d="M4 8h16l-1 13H5L4 8zM9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span>购物（쇼핑）</span>
+      </div>
+      <div class="nav-tab">
+        <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+        <span>更多（더보기）</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 对话页面：上方显示人物名称，中间显示消息，下方为输入区域。 -->
+  <section class="screen" id="roomScreen" hidden>
+
+    <div class="room-header">
+      <button class="icon-btn back-btn" id="goBack" type="button">
+        <svg viewBox="0 0 24 24">
+          <path d="M15.5 3.8 7 12l8.5 8.2"/>
+        </svg>
+      </button>
+
+      <div class="room-name" data-contact-name>角色 B</div>
+
+      <div class="room-side">
+        <button class="icon-btn" id="roomSearch" type="button">
+          <svg viewBox="0 0 24 24">
+            <circle cx="10.5" cy="10.5" r="6.6"/>
+            <path d="m15.5 15.5 5 5"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="roomMenu" type="button">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <main class="messages" id="messageScroll">
+      <div class="day-marker">
+        <span id="dayLabel">2026年11月8日（2026년 11월 8일）</span>
+      </div>
+    </main>
+
+    <!-- 点击输入框后，会自动填入“对话内容”中轮到我方发送的台词。 -->
+    <div class="compose-panel">
+      <div class="next-hint" id="nextHint">
+        点击输入框，自动填入第一条消息（입력창을 누르면 첫 메시지가 자동으로 입력돼요）
+      </div>
+
+      <div class="compose-row">
+        <button class="compose-plus" id="plusBtn" type="button">+</button>
+
+        <div class="field-shell" id="fieldShell">
+          <input class="composer-input" id="composerInput"
+            type="text" inputmode="none" autocomplete="off"
+            readonly placeholder="输入消息（메시지 입력）">
+          <button class="field-smile" id="emojiBtn" type="button">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M8.3 14.1c.8 2.8 6.6 2.9 7.4 0M8.6 9.4h.1M15.4 9.4h.1"/>
+            </svg>
+          </button>
+        </div>
+
+        <button class="send-btn" id="sendBtn" type="button">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 12.2 20 4l-4.2 16-3.2-6.1zM12.6 13.9 20 4"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 键盘区域：每个 button 是一个按键，标签之间的文字是按键上显示的内容。
+           data-key 记录点击后追加的字符；data-letter 标记可以切换语言的字母键。
+           页面打开时，会按 keyboardLayout 的设置填写字母；修改布局请查找“键盘字母排列”。 -->
+      <div class="keyboard" id="keyboard" hidden>
+        <div class="keyboard-guide">
+          <span id="keyboardLanguage" style="font-size:11px;flex-shrink:0">韩文（한국어）</span>
+          <span id="keyboardGuide">自动输入（자동 입력）</span>
+          <span>⋯</span>
+        </div>
+
+        <div class="key-line">
+          <button class="key" data-letter data-key="ㅂ">ㅂ</button>
+          <button class="key" data-letter data-key="ㅈ">ㅈ</button>
+          <button class="key" data-letter data-key="ㄷ">ㄷ</button>
+          <button class="key" data-letter data-key="ㄱ">ㄱ</button>
+          <button class="key" data-letter data-key="ㅅ">ㅅ</button>
+          <button class="key" data-letter data-key="ㅛ">ㅛ</button>
+          <button class="key" data-letter data-key="ㅕ">ㅕ</button>
+          <button class="key" data-letter data-key="ㅑ">ㅑ</button>
+          <button class="key" data-letter data-key="ㅐ">ㅐ</button>
+          <button class="key" data-letter data-key="ㅔ">ㅔ</button>
+        </div>
+
+        <div class="key-line" style="padding:0 13px">
+          <button class="key" data-letter data-key="ㅁ">ㅁ</button>
+          <button class="key" data-letter data-key="ㄴ">ㄴ</button>
+          <button class="key" data-letter data-key="ㅇ">ㅇ</button>
+          <button class="key" data-letter data-key="ㄹ">ㄹ</button>
+          <button class="key" data-letter data-key="ㅎ">ㅎ</button>
+          <button class="key" data-letter data-key="ㅗ">ㅗ</button>
+          <button class="key" data-letter data-key="ㅓ">ㅓ</button>
+          <button class="key" data-letter data-key="ㅏ">ㅏ</button>
+          <button class="key" data-letter data-key="ㅣ">ㅣ</button>
+        </div>
+
+        <div class="key-line">
+          <button class="key wide" data-key="shift" aria-label="切换字母大小写（대소문자 전환）" aria-pressed="false">⇧</button>
+          <button class="key" data-letter data-key="ㅋ">ㅋ</button>
+          <button class="key" data-letter data-key="ㅌ">ㅌ</button>
+          <button class="key" data-letter data-key="ㅊ">ㅊ</button>
+          <button class="key" data-letter data-key="ㅍ">ㅍ</button>
+          <button class="key" data-letter data-key="ㅠ">ㅠ</button>
+          <button class="key" data-letter data-key="ㅜ">ㅜ</button>
+          <button class="key" data-letter data-key="ㅡ">ㅡ</button>
+          <button class="key wide" data-key="delete">⌫</button>
+        </div>
+
+        <div class="key-line">
+          <button class="key wide lang" data-key="123">123</button>
+          <button class="key wide lang" data-key="globe" aria-label="切换键盘（키보드 전환）">🌐</button>
+          <button class="key space" data-key="space">空格（간격）</button>
+          <button class="key send-key" data-key="send">发送（전송）</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 手机底部横条：仅用于外观展示。 -->
+  <div class="home-footer" id="homeFooter">
+    <div class="home-indicator"></div>
+  </div>
+
+  <!-- 设置菜单：用于重播、翻译显示和头像操作。 -->
+  <div class="overlay" id="overlay" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-title" id="sheetTitle">聊天设置（대화 설정）</div>
+      <div class="sheet-sub">
+        本页面用于展示预设对话。（이 페이지는 미리 작성한 대화를 보여 줍니다.）
+      </div>
+
+      <button class="sheet-action" id="sheetReplay" type="button">
+        从头重播对话（대화 처음부터 다시 보기） <span>↺</span>
+      </button>
+
+      <button class="sheet-action" id="sheetTranslations" type="button">
+        显示全部译文（번역 모두 표시） <span id="allTranslationsStatus">开启（켜짐）</span>
+      </button>
+
+      <!-- 选择本地图片后，列表和已显示消息的头像同步更新；刷新页面后恢复配置中的头像。 -->
+      <input type="file" id="avatarUpload" accept="image/*" hidden>
+      <button class="sheet-action" id="sheetUpload" type="button">
+        选择头像（프로필 사진 선택） <span>＋</span>
+      </button>
+
+      <button class="sheet-action" id="sheetPhoto" type="button">
+        下载头像（프로필 사진 다운로드） <span>↓</span>
+      </button>
+
+      <button class="sheet-close" id="sheetClose" type="button">
+        关闭（닫기）
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // 一、常用设置
+  // 该部分集中设置人物信息和播放方式。每行冒号前是设置名称，冒号后是填写的内容。
+  // 修改文字时，替换英文引号内的内容；修改时间时，替换数字。行尾的英文逗号保留。
+  const config = {
+    pageTitle:'交互式聊天模板', // 在此修改浏览器标签页显示的标题。
+    contactName:'角色 B', // 在此修改对方名称；列表、聊天标题和消息署名会同步更新。
+    avatarText:'角', // 在此修改未设置头像时显示的文字，建议使用一至两个字。
+    // 在此设置头像图片。先把图片放在 HTML 文件旁边，再在下方两枚单引号之间填写图片名。
+    // 两枚引号之间留空时，头像位置会显示 avatarText 中的文字。
+    // 例如：avatarUrl:'avatar.png' 表示读取与本文件位于同一文件夹的图片。
+    // 也可填写图片的完整网址。将网址粘贴到浏览器地址栏，能够直接看到图片即可。
+    // 菜单中的“选择头像（프로필 사진 선택）”可先查看本地图片效果。刷新后会恢复下方设置。
+    avatarUrl:'',
+    dateLabel:'2026年11月8日（2026년 11월 8일）', // 在此修改聊天顶部日期；也可直接写作“2026年11月8日”。
+    // dateLabel 是显示在聊天内容上方的故事日期。
+    // 顶部时钟跟随访客设备；每条消息记录其实际出现时的设备本地时间。
+    searchAliases:'角色B Character B', // 在此填写搜索时可用的其他名字。例如填写“小林 林同学”，搜索其中任一个名字均可找到此聊天。
+    initialPreview:'开始聊天吧（대화를 시작해 보세요）', // 在此修改尚未开始对话时的列表摘要。
+    showTranslations:true, // true 表示打开页面时展开译文；改为 false 则收起译文。这里填写英文单词。
+    endText:'对话已结束（대화가 끝났어요）', // 在此修改对话结束时短暂出现的提示。
+    // 在此设置打开页面时使用的键盘。'korean' 为韩文，'pinyin' 为拼音字母。
+    // 例如改为 keyboardLayout:'pinyin', 即可默认显示拼音键盘；页面中的 🌐 也可切换布局。
+    keyboardLayout:'korean',
+    typingIntervalMs:31, // 每次补入两个字符的间隔，单位为毫秒；数值越大，输入越慢。
+    readDelayMs:1050, // 我方发送后，模拟对方已读的等待时间，单位为毫秒。
+    replyDelayMs:380, // 已读后至首条回复之间的等待时间，单位为毫秒。
+    replyGapMs:690, // 对方连续回复的基础间隔，单位为毫秒。
+    replyJitterMs:380 // 连续回复间隔增加的随机时长上限，单位为毫秒；设为 0 可取消随机变化。
+  };
+
+  // 二、对话内容
+  // 在此编辑人物想要说什么。下面每个 {...} 对应一条消息，程序按从上到下的顺序显示。
+  // from:'me' 表示我方，消息出现在右侧；from:'them' 表示对方，消息出现在左侧。
+  // ko 后面的引号内填写气泡正文，zh 后面的引号内填写译文，两处均可使用自己需要的语言。
+  // 只显示正文时，填写 zh:''；填写了译文的消息下方会显示翻译按钮。
+  // 增加消息时可复制一行并修改内容；删除整行可移除该消息，前后消息之间应保留逗号。
+  // 同一人物可以连续发言，也可以让对方先发言；第一条为 them 时，进入聊天后自动开始。
+  // 例如：{from:'me',ko:'第一行\n第二行',zh:''}, 表示一条包含换行且不显示译文的消息。
+  const story = [
+    {from:'me',ko:'在此可以编辑我方人物想要说什么。',zh:'在此填写这条消息的译文。'},
+    {from:'them',ko:'在此可以编辑对方人物的回复。',zh:'在此填写回复对应的译文。'},
+    {from:'them',ko:'复制一行，可以让同一人物继续发言。',zh:''},
+    {from:'me',ko:'继续添加消息，可以延长这段对话。',zh:''},
+    {from:'them',ko:'这是最后一条示例消息。',zh:'在此填写最后一条消息的译文。'}
+  ];
+
+  // 三、页面元素
+  // 该部分按 id 查找页面中的区域和按钮，并将它们集中列在下方。
+  // 函数是一段执行指定操作的代码；后面的函数通过这份列表更新文字或切换页面。
+  const byId = id => document.getElementById(id);
+
+  const els = {
+    list:byId('listScreen'),
+    room:byId('roomScreen'),
+    chatEntry:byId('chatEntry'),
+    goBack:byId('goBack'),
+    statusBar:byId('statusBar'),
+    homeFooter:byId('homeFooter'),
+    scroll:byId('messageScroll'),
+    input:byId('composerInput'),
+    field:byId('fieldShell'),
+    keyboard:byId('keyboard'),
+    send:byId('sendBtn'),
+    hint:byId('nextHint'),
+    entryPreview:byId('entryPreview'),
+    entryTime:byId('entryTime'),
+    overlay:byId('overlay'),
+    toast:byId('toast'),
+    guide:byId('keyboardGuide'),
+    searchInput:byId('searchInput'),
+    day:byId('dayLabel')
+  };
+
+  // 四、播放状态：记录当前消息位置、输入进度及等待状态。
+
+  let index=0; // 下一条尚未显示的消息在 story 中的位置，从 0 开始。
+  let busy=false; // 是否正在等待或显示对方的回复。
+  let composing=false; // 是否已打开模拟键盘，准备发送我方消息。
+  let typeTimer=null;
+  let activeDraft='';
+  let toastTimer=null;
+  let showAll=config.showTranslations;
+  let enteredRoom=false;
+  let runId=0; // 每次重播时增加，用于阻止上一轮尚未完成的回复继续出现。
+
+  const pendingUnreads=[];
+
+  // 五、日期和时钟：故事日期固定显示，时钟和消息时间读取设备本地时间。
+
+  // 将个位数补为两位，使时钟中的小时和分钟保持一致的显示宽度。
+  function pad2(n) {
+    return String(n).padStart(2,'0');
+  }
+
+  // 气泡及列表时间采用“中文（韩语）”的上下午标记和十二小时制；如需更换格式，可在此修改。
+  function formatTime(date=new Date()) {
+    const hour=date.getHours();
+    return `${hour<12?'上午（오전）':'下午（오후）'} ${hour%12||12}:${pad2(date.getMinutes())}`;
+  }
+
+  function renderClock() {
+    const now=new Date();
+
+    byId('systemClock').textContent =
+      `${pad2(now.getHours())}:${pad2(now.getMinutes())}`;
+  }
+
+  // 将常用设置中的名称、标题和日期同步填写到页面的相应位置。
+  document.title=config.pageTitle;
+  document.querySelectorAll('[data-contact-name]').forEach(el=>el.textContent=config.contactName);
+  byId('sheetTitle').textContent=`${config.contactName} · 聊天设置（대화 설정）`;
+  els.entryPreview.textContent=config.initialPreview;
+  const fictionalDate=config.dateLabel;
+  els.day.textContent=fictionalDate;
+
+  renderClock();
+  setInterval(renderClock,1000);
+
+  document.addEventListener('visibilitychange',renderClock);
+
+  // 六、通用辅助函数：处理等待、提示、滚动、发送按钮和已读显示。
+
+  // 返回指定毫秒数后完成的等待，用于模拟阅读和回复间隔。
+  function later(ms) {
+    return new Promise(resolve=>setTimeout(resolve,ms));
+  }
+
+  // 显示约 2.1 秒的短提示；连续触发时，以最近一次提示为准。
+  function toast(text) {
+    clearTimeout(toastTimer);
+    els.toast.textContent=text;
+    els.toast.classList.add('show');
+
+    toastTimer=setTimeout(()=>{
+      els.toast.classList.remove('show');
+    },2100);
+  }
+
+  // 新消息、译文或键盘改变页面高度后，将消息区域滚动到底部。
+  function scrollBottom() {
+    requestAnimationFrame(()=>{
+      els.scroll.scrollTop=els.scroll.scrollHeight;
+    });
+  }
+
+  // 根据是否可以发送，调整按钮颜色及辅助阅读状态。
+  function setReady(ready) {
+    els.send.classList.toggle('ready',!!ready);
+    els.send.setAttribute('aria-disabled',String(!ready));
+  }
+
+  // 清除已发送消息旁的数字 1，表示在这段预设对话中，对方已读消息。
+  function markRead() {
+    for(const unread of pendingUnreads) {
+      unread.textContent='';
+      unread.removeAttribute('aria-label');
+    }
+    pendingUnreads.length=0;
+  }
+
+  // 七、页面切换：在聊天列表与对话页面之间切换。
+
+  function showRoom() {
+    enteredRoom=true;
+
+    els.list.hidden=true;
+    els.room.hidden=false;
+    els.statusBar.classList.add('is-room');
+    els.homeFooter.classList.add('is-room');
+
+    renderClock();
+    scrollBottom();
+    updateHint();
+    // 当第一条消息由对方发送时，进入聊天即开始播放；已经开始的回复继续按原进度进行。
+    if(!busy && index<story.length && story[index].from==='them') replyFromContact();
+  }
+
+  function showList() {
+    enteredRoom=false;
+    hideKeyboard();
+
+    els.room.hidden=true;
+    els.list.hidden=false;
+    els.statusBar.classList.remove('is-room');
+    els.homeFooter.classList.remove('is-room');
+  }
+
+  els.chatEntry.addEventListener('click',showRoom);
+  els.goBack.addEventListener('click',showList);
+
+  // 八、输入提示：根据播放状态提示下一步操作。
+
+  function updateHint() {
+    els.hint.classList.toggle('waiting',busy);
+
+    if(index>=story.length) {
+      els.hint.textContent='对话已结束 · 在 ☰ 菜单中重播（대화가 끝났어요 · ☰ 메뉴에서 다시 보기）';
+      els.input.placeholder='对话已结束（대화가 끝났습니다）';
+    } else if(busy) {
+      els.hint.textContent=`正在等待 ${config.contactName} 的回复…（${config.contactName}의 답장을 기다리는 중…）`;
+      els.input.placeholder='正在等待回复…（답장을 기다리는 중…）';
+    } else if(composing) {
+      els.hint.textContent='消息已自动填入 · 点击黄色按钮发送（메시지가 자동으로 입력됐어요 · 노란 버튼으로 전송）';
+      els.input.placeholder='输入消息（메시지 입력）';
+    } else {
+      els.hint.textContent=index===0
+        ?'点击输入框，自动填入第一条消息（입력창을 누르면 첫 메시지가 자동으로 입력돼요）'
+        :'点击输入框，填写下一条消息（입력창을 눌러 다음 메시지를 작성하세요）';
+
+      els.input.placeholder='输入消息（메시지 입력）';
+    }
+  }
+
+  // 九、键盘布局与输入动画
+
+  // 键盘字母排列：下方三段文字分别对应第一、第二和第三行的字母键。
+  // pinyin 中每一个英文字母对应一个按键；例如第一行从 q 开始，到 p 结束。
+  // 如需调整排列，可交换同一段中的字母位置，保留三行各 10、9、7 个字符的数量。
+  // 按键上的文字和点击时追加的字母会一同更新。
+  const keyboardLetters = {
+    korean:['ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔ','ㅁㄴㅇㄹㅎㅗㅓㅏㅣ','ㅋㅌㅊㅍㅠㅜㅡ'],
+    pinyin:['qwertyuiop','asdfghjkl','zxcvbnm']
+  };
+  let keyboardLayout=config.keyboardLayout==='pinyin'?'pinyin':'korean';
+  let uppercaseLetters=false; // false 为小写；拼音布局中点击 ⇧ 后切换为 true，显示大写。
+
+  // 按当前布局填入全部字母键，并更新键盘左上方的语言名称。
+  function renderKeyboard() {
+    const letters=Array.from(keyboardLetters[keyboardLayout].join(''));
+    els.keyboard.querySelectorAll('[data-letter]').forEach((key,i)=>{
+      const letter=keyboardLayout==='pinyin'&&uppercaseLetters
+        ?letters[i].toUpperCase():letters[i];
+      key.textContent=letter;
+      key.dataset.key=letter;
+    });
+    byId('keyboardLanguage').textContent=keyboardLayout==='pinyin'
+      ?'拼音（병음）':'韩文（한국어）';
+    const shift=els.keyboard.querySelector('[data-key="shift"]');
+    shift.setAttribute('aria-pressed',String(keyboardLayout==='pinyin'&&uppercaseLetters));
+  }
+
+  // 点击 🌐 时切换布局。切换后保留输入框中已有的文字，输入动画继续按原进度进行。
+  function switchKeyboard() {
+    keyboardLayout=keyboardLayout==='pinyin'?'korean':'pinyin';
+    uppercaseLetters=false;
+    renderKeyboard();
+  }
+
+  renderKeyboard();
+
+
+  // 收起键盘并清除尚未发送的草稿；再次点击输入框会重新填写当前台词。
+  function hideKeyboard() {
+    els.keyboard.hidden=true;
+    composing=false;
+
+    if(typeTimer) {
+      clearInterval(typeTimer);
+      typeTimer=null;
+    }
+
+    activeDraft='';
+    els.input.value='';
+    setReady(false);
+    els.input.blur();
+
+    updateHint();
+    scrollBottom();
+  }
+
+  // 将当前台词按字符逐步填入；instant 为 true 时立即补全。
+  function fillDraft(instant=false) {
+    if(index>=story.length||busy||story[index].from!=='me')return;
+
+    if(typeTimer) {
+      clearInterval(typeTimer);
+      typeTimer=null;
+    }
+
+    const full=story[index].ko;
+
+    if(instant) {
+      els.input.value=full;
+      activeDraft=full;
+      els.guide.textContent='输入完成（입력 완료）';
+      setReady(true);
+      updateHint();
+      return;
+    }
+
+    els.input.value='';
+    activeDraft='';
+    setReady(false);
+    els.guide.textContent='正在自动输入消息…（메시지 자동 입력 중…）';
+
+    const letters=Array.from(full);
+    let i=0;
+
+    typeTimer=setInterval(()=>{
+      i=Math.min(i+2,letters.length);
+      activeDraft=letters.slice(0,i).join('');
+      els.input.value=activeDraft;
+
+      if(i>=letters.length) {
+        clearInterval(typeTimer);
+        typeTimer=null;
+
+        els.guide.textContent='可以发送了（전송할 준비가 됐어요）';
+        setReady(true);
+        updateHint();
+      }
+    },config.typingIntervalMs);
+  }
+
+  // 仅在轮到我方发言且未等待回复时打开键盘。
+  function openKeyboard() {
+    if(index>=story.length) {
+      toast('对话已结束，可在菜单中重新开始。（대화가 끝났어요. 메뉴에서 다시 시작할 수 있어요.）');
+      return;
+    }
+
+    if(busy) {
+      toast(`请等待 ${config.contactName} 的回复（${config.contactName}의 답장을 기다려 주세요）`);
+      return;
+    }
+
+    if(story[index].from!=='me'||composing)return;
+
+    composing=true;
+    els.keyboard.hidden=false;
+
+    updateHint();
+    scrollBottom();
+    fillDraft();
+  }
+
+  els.input.addEventListener('click',openKeyboard);
+
+  els.field.addEventListener('click',e=>{
+    if(!e.target.closest('button'))openKeyboard();
+  });
+
+  els.input.addEventListener('keydown',e=>{
+    if(e.key==='Enter') {
+      e.preventDefault();
+      sendCurrent();
+    }
+  });
+
+  byId('emojiBtn').addEventListener('click',()=>{
+    if(!composing)openKeyboard();
+    else toast('本对话按预设消息进行（이 대화는 미리 정해진 메시지로 진행돼요）');
+  });
+
+  // 十、头像加载：为列表和消息中的头像设置同一张图片。
+
+  let portrait=config.avatarUrl;
+  let uploadedAvatarUrl=null; // 暂存所选本地图片的地址，刷新页面后失效。
+
+  function attachAvatar(el) {
+    const img=el.querySelector('img');
+    if(!img)return;
+    const label=el.querySelector('span');
+    if(label)label.textContent=config.avatarText;
+    img.alt=`${config.contactName}头像`;
+    el.classList.remove('has-photo');
+    if(!portrait) {
+      img.removeAttribute('src');
+      return;
+    }
+
+    img.onload=()=>{
+      el.classList.add('has-photo');
+    };
+
+    img.onerror=()=>{
+      el.classList.remove('has-photo');
+    };
+
+    img.src=portrait;
+  }
+
+  function refreshAvatars() {
+    document.querySelectorAll('[data-avatar]').forEach(attachAvatar);
+  }
+
+  refreshAvatars();
+
+  // 十一、消息生成：创建气泡、人物信息、时间、未读标记和译文。
+
+  // 每次调用生成一条消息；同一方连续发言时省略重复的头像和署名。
+  function makeMessage(item) {
+    const me=item.from==='me';
+
+    const container=document.createElement('article');
+    container.className=`msg ${me?'mine':'theirs'}`;
+
+    const prev=els.scroll.querySelector('.msg:last-of-type');
+    const grouped=prev&&prev.dataset.from===item.from;
+
+    container.dataset.from=item.from;
+
+    if(!me) {
+      const slot=document.createElement('div');
+      slot.className='profile-slot';
+
+      if(!grouped) {
+        const avatar=document.createElement('div');
+        avatar.className='avatar small';
+        avatar.dataset.avatar='';
+        avatar.innerHTML='<span data-avatar-label>角</span><img alt="">';
+
+        slot.appendChild(avatar);
+        attachAvatar(avatar);
+      }
+
+      container.appendChild(slot);
+    }
+
+    const content=document.createElement('div');
+    content.className='msg-content';
+
+    if(!me&&!grouped) {
+      const name=document.createElement('div');
+      name.className='profile-name';
+      name.textContent=config.contactName;
+      content.appendChild(name);
+    }
+
+    const row=document.createElement('div');
+    row.className='bubble-row';
+
+    const bubble=document.createElement('div');
+    bubble.className='bubble';
+    bubble.textContent=item.ko;
+
+    const side=document.createElement('div');
+    side.className='msg-side';
+
+    // 读取设备当前时间，将它记录在这条消息旁边。
+    const sentAt=new Date();
+
+    if(me) {
+      const unread=document.createElement('span');
+      unread.className='unread-num';
+      unread.textContent='1';
+      unread.setAttribute('aria-label','未读（안 읽음）');
+
+      side.appendChild(unread);
+      pendingUnreads.push(unread);
+    }
+
+    const time=document.createElement('span');
+    time.className='msg-time';
+    time.textContent=formatTime(sentAt);
+
+    side.appendChild(time);
+    row.append(bubble,side);
+    content.appendChild(row);
+
+    // 仅在填写了译文时创建翻译按钮和译文区域；正文与译文均按纯文本显示。
+    if(item.zh && item.zh.trim()) {
+      const tBtn=document.createElement('button');
+      tBtn.className='translate-btn';
+      tBtn.type='button';
+      tBtn.setAttribute('aria-expanded',String(showAll));
+      tBtn.setAttribute('aria-label','查看中文译文（중국어 번역 보기）');
+
+      tBtn.innerHTML=`
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M2 4h9M6.5 2v2m3 0c0 4-2.1 6.4-6.8 8.5M4.1 6.2c1.2 2.1 3.3 4.1 5.9 5.5M10.7 10.3l2 4m-4-1h6"/>
+        </svg> 翻译（번역）
+      `;
+
+      const translated=document.createElement('div');
+      translated.className='translation';
+      translated.textContent=item.zh;
+      translated.hidden=!showAll;
+
+      tBtn.addEventListener('click',()=>{
+        const show=translated.hidden;
+
+        translated.hidden=!show;
+        tBtn.setAttribute('aria-expanded',String(show));
+        scrollBottom();
+      });
+
+      content.append(tBtn,translated);
+    }
+    container.appendChild(content);
+    els.scroll.appendChild(container);
+
+    els.entryPreview.textContent=item.ko;
+    els.entryTime.textContent=formatTime(sentAt);
+
+    scrollBottom();
+  }
+
+  // 十二、自动回复：依次显示连续的对方消息，遇到我方台词时暂停。
+
+  async function replyFromContact() {
+    const myRun=runId;
+
+    busy=true;
+    updateHint();
+
+    await later(config.readDelayMs);
+    if(myRun!==runId)return;
+
+    markRead();
+
+    // 等待常用设置中 replyDelayMs 指定的时长，然后继续显示回复。
+    await later(config.replyDelayMs);
+
+    if(myRun!==runId)return;
+
+    while(index<story.length&&story[index].from==='them') {
+      if(myRun!==runId)return;
+
+      makeMessage(story[index]);
+      index++;
+
+      const delay=index>=story.length
+        ?500
+        :story[index].from==='them'
+          ?config.replyGapMs+Math.floor(Math.random()*config.replyJitterMs)
+          :480;
+
+      await later(delay);
+    }
+
+    if(myRun!==runId)return;
+
+    busy=false;
+    updateHint();
+
+    if(index>=story.length)toast(config.endText);
+  }
+
+  // 十三、发送消息：提交当前预设台词，并判断是否开始对方回复。
+
+  function sendCurrent() {
+    if(!composing||busy||index>=story.length||story[index].from!=='me')return;
+
+    if(typeTimer) {
+      fillDraft(true);
+      return;
+    }
+
+    if(!els.input.value.trim())return;
+
+    // 从“对话内容”中读取当前台词，并将它显示为一条已发送的消息。
+    makeMessage(story[index]);
+    index++;
+
+    hideKeyboard();
+
+    if(index<story.length&&story[index].from==='them') {
+      replyFromContact();
+    } else {
+      updateHint();
+      if(index>=story.length)toast(config.endText);
+    }
+  }
+
+  els.send.addEventListener('click',()=>{
+    if(!composing) {
+      openKeyboard();
+      return;
+    }
+
+    sendCurrent();
+  });
+
+  // 点击模拟键盘时，按键会短暂变色，并在输入框中追加或删除字符。
+  // 点击发送后显示的台词以“对话内容”为准，可在上方 story 中修改实际台词。
+  // 🌐 切换拼音和韩文布局；拼音布局中的 ⇧ 切换大小写；123 显示当前输入模式的提示。
+  els.keyboard.addEventListener('click',e=>{
+    const key=e.target.closest('[data-key]');
+    if(!key)return;
+
+    key.classList.add('pressed');
+    setTimeout(()=>key.classList.remove('pressed'),110);
+
+    const what=key.dataset.key;
+
+    // 先处理布局按钮，让切换操作保留正在逐字填入的台词。
+    if(what==='globe') {
+      switchKeyboard();
+      return;
+    }
+    if(what==='shift') {
+      if(keyboardLayout==='pinyin') {
+        uppercaseLetters=!uppercaseLetters;
+        renderKeyboard();
+      } else {
+        toast('韩文键盘 · 自动输入模式（한글 키보드 · 자동 입력 모드）');
+      }
+      return;
+    }
+    if(what==='123') {
+      toast(keyboardLayout==='pinyin'
+        ?'拼音键盘 · 自动输入模式（병음 키보드 · 자동 입력 모드）'
+        :'韩文键盘 · 自动输入模式（한글 키보드 · 자동 입력 모드）');
+      return;
+    }
+
+    if(what==='send') {
+      sendCurrent();
+      return;
+    }
+
+    if(!composing)return;
+
+    if(typeTimer)fillDraft(true);
+
+    if(what==='delete') {
+      els.input.value=Array.from(els.input.value).slice(0,-1).join('');
+    } else if(what==='space') {
+      els.input.value+=' ';
+
+    } else {
+      els.input.value+=what;
+    }
+
+    activeDraft=els.input.value;
+    setReady(!!activeDraft.trim());
+  });
+
+  // 十四、搜索和辅助按钮：筛选联系人并显示操作说明。
+
+  byId('searchOpen').addEventListener('click',()=>{
+    const panel=byId('searchbox');
+    panel.hidden=!panel.hidden;
+
+    if(!panel.hidden)els.searchInput.focus();
+  });
+
+  els.searchInput.addEventListener('input',()=>{
+    const matches=`${config.contactName} ${config.searchAliases}`.toLowerCase()
+      .includes(els.searchInput.value.trim().toLowerCase());
+
+    els.chatEntry.hidden=!matches;
+  });
+
+  byId('roomSearch').addEventListener('click',()=>{
+    toast('可在各条消息的气泡下方查看译文（메시지 번역은 각 말풍선 아래에서 볼 수 있어요）');
+  });
+
+  byId('plusBtn').addEventListener('click',()=>{
+    toast('可在右上角菜单中选择或下载头像（오른쪽 위 메뉴에서 프로필 사진을 선택하거나 다운로드할 수 있어요）');
+  });
+
+  // 十五、菜单操作：打开、关闭设置菜单，并响应 Escape 键。
+
+  function openMenu() {
+    els.overlay.hidden=false;
+    byId('allTranslationsStatus').textContent=showAll?'开启（켜짐）':'关闭（꺼짐）';
+  }
+
+  byId('roomMenu').addEventListener('click',openMenu);
+  byId('listSettings').addEventListener('click',openMenu);
+
+  byId('sheetClose').addEventListener('click',()=>{
+    els.overlay.hidden=true;
+  });
+
+  els.overlay.addEventListener('click',e=>{
+    if(e.target===els.overlay)els.overlay.hidden=true;
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+
+    if(!els.overlay.hidden) {
+      els.overlay.hidden=true;
+    } else if(composing) {
+      hideKeyboard();
+    } else if(enteredRoom) {
+      showList();
+    }
+  });
+
+  // 十六、重新播放：清空已显示消息，并恢复初始播放状态。
+
+  function replay() {
+    runId++;
+
+    pendingUnreads.length=0;
+    index=0;
+    busy=false;
+
+    hideKeyboard();
+
+    els.scroll.querySelectorAll('.msg').forEach(m=>m.remove());
+
+    els.entryPreview.textContent=config.initialPreview;
+    els.entryTime.textContent='';
+
+    // 重播时恢复常用设置中的默认译文显示状态。
+    showAll=config.showTranslations;
+    byId('allTranslationsStatus').textContent=showAll?'开启（켜짐）':'关闭（꺼짐）';
+
+    // 保留配置中的故事日期，并刷新设备时钟。
+    els.day.textContent=fictionalDate;
+    renderClock();
+
+    els.overlay.hidden=true;
+
+    updateHint();
+    scrollBottom();
+
+    toast('正在从头重新开始（처음부터 다시 시작합니다）');
+    if(enteredRoom && story.length && story[0].from==='them')replyFromContact();
+  }
+
+  byId('sheetReplay').addEventListener('click',replay);
+
+  // 十七、批量切换译文：同步调整全部已显示译文及后续消息的默认状态。
+
+  byId('sheetTranslations').addEventListener('click',()=>{
+    showAll=!showAll;
+
+    document.querySelectorAll('.translation').forEach(el=>{
+      el.hidden=!showAll;
+    });
+
+    document.querySelectorAll('.translate-btn').forEach(el=>{
+      el.setAttribute('aria-expanded',String(showAll));
+    });
+
+    byId('allTranslationsStatus').textContent=showAll?'开启（켜짐）':'关闭（꺼짐）';
+
+    scrollBottom();
+  });
+
+  // 十八、头像文件操作：选择本地图片，或尝试下载当前头像。
+
+  // 选择本地图片后，更新本次打开页面时的头像。要保存为模板的固定头像，请修改上方 avatarUrl。
+  byId('sheetUpload').addEventListener('click',()=>byId('avatarUpload').click());
+  byId('avatarUpload').addEventListener('change',event=>{
+    const file=event.target.files[0];
+    if(!file)return;
+    if(!file.type.startsWith('image/')) {
+      toast('请选择图片文件（이미지 파일을 선택해 주세요）');
+      event.target.value='';
+      return;
+    }
+    if(uploadedAvatarUrl)URL.revokeObjectURL(uploadedAvatarUrl);
+    uploadedAvatarUrl=URL.createObjectURL(file);
+    portrait=uploadedAvatarUrl;
+    refreshAvatars();
+    els.overlay.hidden=true;
+    event.target.value='';
+    toast('头像仅在当前页面有效（사진은 현재 페이지에서만 적용돼요）');
+  });
+
+  // 下载按钮会读取当前头像，并将图片交给浏览器保存。
+  // 图片能否直接下载取决于浏览器和图片所在网站的设置，也可打开原图片网址保存。
+  byId('sheetPhoto').addEventListener('click',async()=>{
+    els.overlay.hidden=true;
+
+    if(!portrait) {
+      toast('请先设置头像（먼저 프로필 사진을 설정해 주세요）');
+      return;
+    }
+
+    try {
+      const response=await fetch(portrait);
+
+      if(!response.ok) {
+        throw new Error('Image request failed');
+      }
+
+      const blob=await response.blob();
+      const url=URL.createObjectURL(blob);
+
+      const link=document.createElement('a');
+      link.href=url;
+      link.download='avatar'; // 下载文件使用 avatar 作为名称，图片格式由浏览器处理。
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(()=>{
+        URL.revokeObjectURL(url);
+      },2000);
+
+    } catch(error) {
+      toast('无法下载头像（프로필 사진을 다운로드할 수 없어요）');
+    }
+  });
+
+  // 初始化提示；对话将在进入聊天页面并按相应操作后开始。
+  updateHint();
+})();
+</script>
+
+</body>
+</html>
